@@ -1,0 +1,11 @@
+deb http://{{ ansible_facts.eth0.ipv4.address }}/debmirror/debian wheezy main contrib non-free
+deb http://{{ ansible_facts.eth0.ipv4.address }}/debmirror/debian-security wheezy/updates main contrib non-free
+ 
+# PVE repository provided by proxmox.com, only for installation (this repo will stay on 3.1)
+deb http://download.proxmox.com/debian wheezy pve
+ 
+# security updates
+deb http://security.debian.org/ wheezy/updates main contrib
+
+# https://linux-fai.uni-koeln.narkive.com/jcSOJPIQ/fai-make-nfsroot-setup-failure-fai-server
+deb http://fai-project.org/download jessie koeln
