@@ -1,5 +1,5 @@
 ---
-- hosts: joshua
+- hosts: localhost
   connection: local
   become: true
   vars_files:
