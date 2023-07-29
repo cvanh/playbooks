@@ -1,11 +1,10 @@
 ---
 - hosts: donald
   become: true
-  connection: local
   vars_files:
     - ../vars/joshua.yml
 
   tasks:
     - name: change hostname
       hostname:
-        name: { { joshua.hostname } }
+        name: "{{ joshua.hostname }}"

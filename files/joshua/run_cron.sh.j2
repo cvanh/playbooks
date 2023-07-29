@@ -7,7 +7,7 @@ AP_MAC_ADDR = arp -a | grep wlp3s0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigi
 PHONE_MAC_ADDR = {{ joshua.phone_mac }}
 
 if [ "$PHONE_MAC_ADDR" != "$AP_MAC_ADDR" ]; then
-
+    ansible-pull -U https://github.com/cvanh/playbooks.git tasks/joshua.yml 
     notify-send "ran ansible" 
 else
     echo "connected to access point exiting"
