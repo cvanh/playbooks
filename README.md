@@ -25,6 +25,8 @@ We have 4 nodes, Donald being the master and Kwik, Kwek and Kwak being the slave
 the slaves do the heavy lifting in my homelab and are often turned off to save power(money).
 the master(Donald) needs to stay online as much as i can afford
 
+the laptop is called joshua 
+
 Running
 ----------------
 `ansible-playbook -i hosts.ini main.yml```

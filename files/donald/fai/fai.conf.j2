@@ -1,6 +1,0 @@
-SERVER={{ ansible_facts.eth0.ipv4.address }} 
-FAI_CONFIG_SRC=nfs://$SERVER/srv/fai/config
-
-# Account for saving log files and calling fai-chboot.
-LOGUSER=fai
-FAI_LOGPROTO=ssh
