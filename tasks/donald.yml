@@ -5,66 +5,18 @@
   vars_files:
     - ../vars/main.yml
 
-  tasks:
-    - name: set the correct host name
-      hostname:
-        name: "{{master.hostname}}"
-
-    - name: Install packages for PXE server
-      apt:
-        update_cache: true
-        state: present
-        pkg:
-          - apache2
-          - fai-quickstart
-          - fai-doc
-          - fai-server
-          - isc-dhcp-server
-          - tftpd-hpa
-          - nfs-kernel-server
-          - syslinux-common
-          - debmirror
-
-    # - name: create local debian mirror
-    #   ansible.builtin.file:
-    #     src: /files/scratch/debmirror
-    #     dest: /var/www/debmirror
-    #     state: link
-    - name: modify /etc/hosts
-      lineinfile:
-        dest: /etc/hosts
-        search_string: "^192.168.2.1"
-        line: "{{ ansible_facts.eth0.ipv4.address }}     faiserver"
-      # lineinfile:
-      #   dest: /etc/hosts
-      #   search_string: "^192.168.2.2"
-      #   line: " 192.168.2.2     demohost"
-
-    - name: "move fai.conf"
-      template:
-        src: ../files/donald/fai/fai.conf.j2
-        dest: /etc/fai/fai.conf
-    - name: move nsfsroot.conf
-      template:
-        src: ../files/donald/fai/nfsroot.conf.j2
-        dest: /etc/fai/nfsroot.conf
-
-    - name: move sources.conf
-      template:
-        src: ../files/donald/fai/sources.list.j2
-        dest: /etc/fai/sources.list
-
-    - name: setup fai
-      ansible.builtin.shell:
-        cmd: fai-setup -v -k -f
-
-    - name: move dhcp.conf
-      template:
-        src: ../files/donald/dhcp/dhcp.conf.j2
-        dest: /etc/dhcp/dhcp.conf
-
-    - name: reload dhcp service
-      systemd:
-        state: restarted
-        daemon_reload: true
-        name: isc-dhcp-server
+  vars:
+    dhcp_subnets:
+      - ip: 192.168.50.0
+        netmask: 255.255.255.0
+    pxeserver_ip: 192.168.50.2
+    pxeserver_images:
+      - name: centos7_x86_64
+        default: true
+        kernel_url: http://ftp.belnet.be/ftp.centos.org/7/os/x86_64/isolinux/vmlinuz
+        initrd_url: http://ftp.belnet.be/ftp.centos.org/7/os/x86_64/isolinux/initrd.img
+        label: CentOS 7 x86_64
+  roles:
+    - bertvv.tftp
+    - bertvv.dhcp
+    - bertvv.pxeserver

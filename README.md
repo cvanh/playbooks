@@ -47,3 +47,8 @@ Author Information
 ------------------
 
 An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+
+qemu-system-x86_64 -m 1024 \                  
+                              -boot n \
+                              -net nic \ 
+                              -net tap,ifname=virttap,script=no,downscript=no
