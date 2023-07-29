@@ -1,5 +1,7 @@
 # Joshua 
-This is the documentation for Joshua, joshua is my laptop(T14) 
+This is the documentation for Joshua, joshua is my laptop(T14). 
+there is a cron job running ansible-pull to run it every once in a while.  
+joshua is excluded from host.ini
 
 ### OS
 we use [linux mint xfce](https://linuxmint.com/download.php) but cinnamon will maybe also work
@@ -18,3 +20,6 @@ the hardware of joshua is an thinkpad T14 with an added smart card slot for my s
 `
  and then run: 
 `ansible-playbook -i hosts.ini tasks/joshua.yml`
+
+### todo
+[] add joshua to hosts.ini

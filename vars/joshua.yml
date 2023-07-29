@@ -1,0 +1,6 @@
+---
+# vars file for joshua 
+joshua: 
+  hostname: joshua 
+  phone_mac: D8:1C:79:60:40:E2
+  

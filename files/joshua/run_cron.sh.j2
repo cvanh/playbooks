@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh 
+
+# we want to know the MAC address of the access point we are connected to. so we dont run ansible on a mobile hotspot
+AP_MAC_ADDR = arp -a | grep wlp3s0 | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'
+
+# this is the address of my phone
+PHONE_MAC_ADDR = {{ joshua.phone_mac }}
+
+if [ "$PHONE_MAC_ADDR" != "$AP_MAC_ADDR" ]; then
+
+    notify-send "ran ansible" 
+else
+    echo "connected to access point exiting"
+    notify-send "{{ joshua.hostname }}: Connected to phone not running ansible" 
+fi

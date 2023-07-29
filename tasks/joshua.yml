@@ -1,11 +1,11 @@
 ---
 - hosts: donald
   become: true
-  remote_user: "{{ master.root_user }}"
+  connection: local
   vars_files:
-    - ../vars/donald.yml
+    - ../vars/joshua.yml
 
   tasks:
     - name: change hostname
       hostname:
-        name: { { master.hostname } }
+        name: { { joshua.hostname } }
