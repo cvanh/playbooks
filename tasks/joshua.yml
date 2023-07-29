@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   connection: local
-  become: true
+  # become: true
   vars_files:
     - ../vars/joshua.yml
 
@@ -9,3 +9,20 @@
     - name: change hostname
       hostname:
         name: "{{ joshua.hostname }}"
+
+    - name: create dir for all the configs
+      file:
+        path: "{{ joshua.ansible_files_dir }}"
+        state: directory
+
+    - name: move cron script to our dir
+      ansible.builtin.template:
+        src: ../files/joshua/run_cron.sh.j2
+        dest: "{{ joshua.ansible_files_dir }}/run_cron.sh"
+
+    - name: setup a cron job that runs ansible
+      ansible.builtin.cron:
+        name: "check dirs"
+        minute: "0"
+        hour: "12,14,20,22"
+        job: "./{{ joshua.ansible_files_dir }}/run_cron.sh"
