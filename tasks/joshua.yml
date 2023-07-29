@@ -1,5 +1,6 @@
 ---
-- hosts: donald
+- hosts: joshua
+  connection: local
   become: true
   vars_files:
     - ../vars/joshua.yml
