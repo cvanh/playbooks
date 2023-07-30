@@ -1,7 +1,8 @@
 ---
 - hosts: localhost
   connection: local
-  # become: true
+  become_user: conto
+  become: true
   vars_files:
     - ../vars/joshua.yml
 
@@ -17,6 +18,7 @@
 
     - name: move cron script to our dir
       ansible.builtin.template:
+        mode: 770
         src: ../files/joshua/run_cron.sh.j2
         dest: "{{ joshua.ansible_files_dir }}/run_cron.sh"
 
@@ -26,3 +28,28 @@
         minute: "0"
         hour: "12,14,20,22"
         job: "./{{ joshua.ansible_files_dir }}/run_cron.sh"
+
+    - name: install apt packages
+      ansible.builtin.apt:
+        name:
+          - i3-wm
+          - rofi
+          - feh
+          - nvim
+
+    - name: copy i3 config
+      copy:
+        src: ../files/joshua/i3config
+        dest: "{{ joshua.user_dir }}/.config/i3/config"
+
+    - name: copy i3 background
+      copy:
+        src: ../files/joshua/background.png
+        dest: "{{ joshua.user_dir }}/Pictures/background.png"
+
+    # - name: install homebrew
+    #   ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # - name: install brew packages
+    #   community.general.homebrew:
+    #     name:
+    #       - php@8.2

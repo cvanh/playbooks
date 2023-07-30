@@ -19,7 +19,7 @@ the hardware of joshua is an thinkpad T14 with an added smart card slot for my s
 
 `
  and then run: 
-`ansible-playbook -i hosts.ini tasks/joshua.yml`
+`ansible-playbook -i hosts.ini tasks/joshua.yml --ask-become-pass`
 
 ### todo
 [] add joshua to hosts.ini
