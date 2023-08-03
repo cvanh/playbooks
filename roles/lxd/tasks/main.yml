@@ -2,7 +2,22 @@
 # tasks file for lxd
 - name: Install lxd and lxc via snap
   community.general.snap:
-    name: 
+    name:
       - lxd
-      - lxc
-      
+  notify:
+    - Configure lxd
+
+# configure dnsmasq to support *.lxd domain
+
+- name: Install dnsmasq
+  ansible.builtin.apt:
+    name:
+      - dnsmasq
+  register: apt
+
+- name: Add lxd's dns authority to dnsmasq
+  ansible.builtin.lineinfile:
+    path: /etc/dnsmasq.conf
+    regexp: "^server=\/lxd\/"
+    line: "server=/lxd/{{ ansible_lxdbr0.ipv4.address }}"
+  notify: Reload dnsmasq

@@ -1,2 +1,16 @@
 ---
 # handlers file for lxd
+- name: move lxd config
+  template:
+    src: ../templates/lxd.yml.j2
+    dest: /tmp/lxd.yml
+  listen: Configure lxd
+
+- name: Run lxd init
+  ansible.builtin.shell: lxd init --preseed < /tmp/lxd.yml
+  listen: Configure lxd
+
+- name: Reload dnsmasq
+  ansible.builtin.systemd:
+    name: dnsmasq
+    state: reloaded
