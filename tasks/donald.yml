@@ -9,3 +9,14 @@
     - name: change hostname
       hostname:
         name: "{{ master.hostname }}"
+    - name: download iventoy
+      ansible.builtin.get_url:
+        url: https://github.com/ventoy/PXE/releases/download/v1.0.17/iventoy-1.0.17-linux-free.tar.gz
+        dest: /tmp/iventoy
+        mode: 777
+
+    - name: unpack iventoy
+      ansible.builtin.unarchive:
+        src: /tmp/iventoy
+        dest: /usr/bin
+        remote_src: true

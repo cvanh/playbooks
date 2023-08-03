@@ -1,7 +1,6 @@
 ---
 - hosts: localhost
-  connection: local
-  become_user: conto
+  # become_user: conto
   become: true
   vars_files:
     - ../vars/joshua.yml
@@ -35,7 +34,7 @@
           - i3-wm
           - rofi
           - feh
-          - nvim
+          - neovim
 
     - name: copy i3 config
       copy:
@@ -46,10 +45,3 @@
       copy:
         src: ../files/joshua/background.png
         dest: "{{ joshua.user_dir }}/Pictures/background.png"
-
-    # - name: install homebrew
-    #   ansible.builtin.shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # - name: install brew packages
-    #   community.general.homebrew:
-    #     name:
-    #       - php@8.2

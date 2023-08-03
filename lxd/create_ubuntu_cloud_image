@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Make sure build dir exists
+BUILD_DIR=/tmp/lxd_images/
+mkdir -p $BUILD_DIR
+
+wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img \
+    -O ${BUILD_DIR}rootfs.img
+
+cat << EOF > ${BUILD_DIR}metadata.yaml
+architecture: "x86_64"
+creation_date: 1649904010
+properties:
+    architecture: "x86_64"
+    description: "Ubuntu 22.04 LTS server (20220414)"
+    os: "ubuntu"
+    release: "jammy"
+EOF
+
+# Create LXD image & import it
+cd ${BUILD_DIR}
+
+echo "inserting ssh key this may take a while"
+sudo virt-sysprep -a rootfs.img \
+--ssh-inject root:file:$HOME/.ssh/id_ed25519.pub  
+
+echo "archiving the image"
+tar cfz image.tar.gz metadata.yaml rootfs.img
+
+echo "importing the image into lxc"
+lxc image import image.tar.gz --alias debian-cloud 
+
+rm -rf ${BUILD_DIR}
