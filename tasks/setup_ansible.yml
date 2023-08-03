@@ -1,0 +1,14 @@
+---
+- hosts: all
+
+  tasks:
+    - name: create ansible user
+      ansible.builtin.user:
+        name: cvanh
+        groups: sudo
+
+    - name: add ssh key
+      ansible.posix.authorized_key:
+        user: cvanh
+        state: present
+        key: https://github.com/cvanh.keys

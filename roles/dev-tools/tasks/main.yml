@@ -1,0 +1,15 @@
+---
+# tasks file for dev-tools
+- name: install homebrew packages
+  community.general.homebrew:
+    name:
+      - visual-studio-code
+      - go
+      - ruby
+      - nvm
+      - php
+
+- name: install apt packages
+  ansible.builtin.apt:
+    name:
+      - neovim

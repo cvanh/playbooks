@@ -1,18 +1,15 @@
 ---
 - hosts: joshua
-
   # become_user: "{{ user }}"
   become: true
   vars_files:
     - ../host_vars/joshua.yml
 
-  # vars:
-  # user_dir: "{{ansible_env.HOME}}"
-
   roles:
     - "../roles/i3-wm"
     - "../roles/snapd"
     - "../roles/lxd"
+    # - "../roles/dev-tools"
 
   tasks:
     - name: change hostname

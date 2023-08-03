@@ -1,2 +1,4 @@
 ---
-- import_playbook: tasks/donald.yml
+- ansible.builtin.import_playbook:
+    - tasks/donald.yml
+    - tasks/setup_ansible.yml
