@@ -1,0 +1,8 @@
+---
+# tasks file for lxd
+- name: Install lxd and lxc via snap
+  community.general.snap:
+    name: 
+      - lxd
+      - lxc
+      

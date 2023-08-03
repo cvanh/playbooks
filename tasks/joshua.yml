@@ -9,6 +9,8 @@
     user_dir: "{{ joshua.user_dir }}"
   roles:
     - "../roles/i3-wm"
+    - "../roles/snapd"
+    - "../roles/lxd"
 
   tasks:
     - name: change hostname

@@ -1,0 +1,13 @@
+---
+- name: on linux mint move the snap lock
+  ansible.builtin.file:
+    path: /etc/apt/preferences.d/nosnap.pref 
+    state: absent 
+  when: ansible_distribution == "Linux Mint"
+
+- name: install snapd
+  ansible.builtin.apt:
+    name:
+      - snapd
+    update_cache: true 
+    
