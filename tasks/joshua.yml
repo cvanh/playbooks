@@ -5,6 +5,11 @@
   vars_files:
     - ../vars/joshua.yml
 
+  vars:
+    user_dir: "{{ joshua.user_dir }}"
+  roles:
+    - "../roles/i3-wm"
+
   tasks:
     - name: change hostname
       hostname:
@@ -15,33 +20,20 @@
         path: "{{ joshua.ansible_files_dir }}"
         state: directory
 
-    - name: move cron script to our dir
-      ansible.builtin.template:
-        mode: 770
-        src: ../files/joshua/run_cron.sh.j2
-        dest: "{{ joshua.ansible_files_dir }}/run_cron.sh"
+    # - name: move cron script to our dir
+    #   ansible.builtin.template:
+    #     mode: 770
+    #     src: ../files/joshua/run_cron.sh.j2
+    #     dest: "{{ joshua.ansible_files_dir }}/run_cron.sh"
 
-    - name: setup a cron job that runs ansible
-      ansible.builtin.cron:
-        name: "check dirs"
-        minute: "0"
-        hour: "12,14,20,22"
-        job: "./{{ joshua.ansible_files_dir }}/run_cron.sh"
+    # - name: setup a cron job that runs ansible
+    #   ansible.builtin.cron:
+    #     name: "check dirs"
+    #     minute: "0"
+    #     hour: "12,14,20,22"
+    #     job: "./{{ joshua.ansible_files_dir }}/run_cron.sh"
 
     - name: install apt packages
       ansible.builtin.apt:
         name:
-          - i3-wm
-          - rofi
-          - feh
           - neovim
-
-    - name: copy i3 config
-      copy:
-        src: ../files/joshua/i3config
-        dest: "{{ joshua.user_dir }}/.config/i3/config"
-
-    - name: copy i3 background
-      copy:
-        src: ../files/joshua/background.png
-        dest: "{{ joshua.user_dir }}/Pictures/background.png"
