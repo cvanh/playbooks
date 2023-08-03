@@ -2,5 +2,5 @@
 # vars file for joshua
 hostname: Joshua
 phone_mac: D8:1C:79:60:40:E2
-user_dir: /home/conto
+user_dir: "{{ansible_env.HOME}}"
 ansible_files_dir: ~/.config/ansible

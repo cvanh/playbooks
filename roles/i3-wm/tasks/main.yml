@@ -8,6 +8,11 @@
       - feh
     update_cache: true
 
+- name: create directory for the i3 configs
+  ansible.builtin.file:
+    path: "{{ user_dir}}/.config/i3"
+    state: directory
+
 - name: copy i3 config
   ansible.builtin.copy:
     src: ../files/i3config
@@ -16,4 +21,4 @@
 - name: copy i3 background
   ansible.builtin.copy:
     src: ../files/background.png
-    dest: "{{ user_dir }}/Pictures/background.png"
+    dest: "{{ user_dir }}/.config/i3/background.png"

@@ -192,7 +192,7 @@ bindsym $mod+space exec rofi -show combi -run-command "i3-msg exec '{cmd}'" -sho
 bindsym $mod+l+k exec --no-startup-id rofi -show ssh -run-command "i3-msg exec '${cmd}'" -show-icons
 
 # background 
-exec --no-startup-id feh --bg-scale ~/Pictures/background.png
+exec --no-startup-id feh --bg-scale ~/.config/i3/background.png
 
 
 # from: https://github.com/catppuccin/i3/blob/main/themes/catppuccin-mocha 

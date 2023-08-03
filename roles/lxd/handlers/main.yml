@@ -1,6 +1,6 @@
 ---
 # handlers file for lxd
-- name: move lxd config
+- name: Move lxd config
   template:
     src: ../templates/lxd.yml.j2
     dest: /tmp/lxd.yml

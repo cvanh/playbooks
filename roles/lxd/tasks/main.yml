@@ -13,11 +13,9 @@
   ansible.builtin.apt:
     name:
       - dnsmasq
-  register: apt
-
-- name: Add lxd's dns authority to dnsmasq
-  ansible.builtin.lineinfile:
-    path: /etc/dnsmasq.conf
-    regexp: "^server=\/lxd\/"
-    line: "server=/lxd/{{ ansible_lxdbr0.ipv4.address }}"
-  notify: Reload dnsmasq
+# - name: Add lxd's dns authority to dnsmasq
+#   ansible.builtin.lineinfile:
+#     path: /etc/dnsmasq.conf
+#     regexp: "^server=\/lxd\/"
+#     line: "server=/lxd/{{ ansible_lxdbr0.ipv4.address }}"
+#   notify: Reload dnsmasq

@@ -3,7 +3,7 @@
   become: true
   remote_user: "{{ user }}"
   vars_files:
-    - ../vars/donald.yml
+    - ../host_vars/donald.yml
 
   tasks:
     - name: change hostname

@@ -1,9 +1,13 @@
 ---
 - hosts: joshua
-  become_user: "{{ user }}"
+
+  # become_user: "{{ user }}"
   become: true
   vars_files:
-    - ../vars/yml
+    - ../host_vars/joshua.yml
+
+  # vars:
+  # user_dir: "{{ansible_env.HOME}}"
 
   roles:
     - "../roles/i3-wm"
