@@ -1,14 +1,15 @@
 ---
 # tasks file for i3-wm
-- name: install i3-wm 
+- name: install i3-wm
   ansible.builtin.apt:
     name:
       - i3-wm
       - rofi
       - feh
+    update_cache: true
 
 - name: copy i3 config
-  ansible.builtin.copy: 
+  ansible.builtin.copy:
     src: ../files/i3config
     dest: "{{ user_dir }}/.config/i3/config"
 

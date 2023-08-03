@@ -1,12 +1,10 @@
 ---
-- hosts: localhost
-  # become_user: conto
+- hosts: joshua
+  become_user: "{{ user }}"
   become: true
   vars_files:
-    - ../vars/joshua.yml
+    - ../vars/yml
 
-  vars:
-    user_dir: "{{ joshua.user_dir }}"
   roles:
     - "../roles/i3-wm"
     - "../roles/snapd"
@@ -15,25 +13,25 @@
   tasks:
     - name: change hostname
       hostname:
-        name: "{{ joshua.hostname }}"
+        name: "{{ hostname }}"
 
     - name: create dir for all the configs
       file:
-        path: "{{ joshua.ansible_files_dir }}"
+        path: "{{ ansible_files_dir }}"
         state: directory
 
     # - name: move cron script to our dir
     #   ansible.builtin.template:
     #     mode: 770
-    #     src: ../files/joshua/run_cron.sh.j2
-    #     dest: "{{ joshua.ansible_files_dir }}/run_cron.sh"
+    #     src: ../files/run_cron.sh.j2
+    #     dest: "{{ ansible_files_dir }}/run_cron.sh"
 
     # - name: setup a cron job that runs ansible
     #   ansible.builtin.cron:
     #     name: "check dirs"
     #     minute: "0"
     #     hour: "12,14,20,22"
-    #     job: "./{{ joshua.ansible_files_dir }}/run_cron.sh"
+    #     job: "./{{ ansible_files_dir }}/run_cron.sh"
 
     - name: install apt packages
       ansible.builtin.apt:

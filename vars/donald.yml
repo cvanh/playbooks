@@ -1,6 +1,4 @@
 ---
 # vars file for homelab
-master: 
-  hostname: donald
-  root_user: root 
-  
+hostname: donald
+user: root

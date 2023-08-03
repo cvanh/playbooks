@@ -1,7 +1,6 @@
 ---
-# vars file for joshua 
-joshua: 
-  hostname: Joshua 
-  phone_mac: D8:1C:79:60:40:E2
-  user_dir: /home/conto
-  ansible_files_dir: ~/.config/ansible
+# vars file for joshua
+hostname: Joshua
+phone_mac: D8:1C:79:60:40:E2
+user_dir: /home/conto
+ansible_files_dir: ~/.config/ansible
