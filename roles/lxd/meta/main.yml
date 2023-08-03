@@ -1,6 +1,6 @@
 galaxy_info:
   author: Constantijn van Hartesveldt
-  description: my i3 config
+  description: my lxd setup
   min_ansible_version: "2.1"
   license: BSD
 
